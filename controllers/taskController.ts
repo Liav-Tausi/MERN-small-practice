@@ -2,13 +2,14 @@ import {Request, Response} from "express";
 import {createTaskHandler, delTaskHandler, getTasksHandler, updateTaskHandler} from "../handlers/taskHandler";
 import {ITask, ITaskDisplay} from "../interfaces/tasks";
 import {taskBodySchema} from "../middleware/bodyValidators";
+import * as jwt from "jsonwebtoken";
+import {jwtSecret} from "../handlers/userHandler";
 
 export const getTasksController = (req: Request, res: Response)=> {
     try {
         const queryParams = req.query;
         const {user_id} = queryParams
         const result: ITaskDisplay[] = getTasksHandler(String(user_id))
-        console.log(queryParams)
         res.status(200).json({
             status: 'success',
             result
@@ -30,7 +31,7 @@ export const createTaskController = (req: Request, res: Response) => {
             title,
             description,
             isDone,
-            user_id
+            user_id,
         })
         const returnJson = {
             status: result ? 'success' : 'fail',

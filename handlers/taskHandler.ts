@@ -1,5 +1,7 @@
 import {ITask, ITaskDisplay} from "../interfaces/tasks";
 import {createTaskDal, delTaskDal, getTasksDal, updateTaskDal} from "../DAL/taskDal";
+import * as jwt from "jsonwebtoken"
+import {jwtSecret} from "./userHandler";
 
 export const getTasksHandler = (user_id: string): ITaskDisplay[]=>{
     const dbResult: ITask[] = getTasksDal(user_id)
@@ -17,7 +19,6 @@ export const getTasksHandler = (user_id: string): ITaskDisplay[]=>{
 
 export const createTaskHandler = (task: ITask) => {
     return createTaskDal(task);
-
 }
 
 export const updateTaskHandler = (task: ITask) => {

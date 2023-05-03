@@ -14,3 +14,16 @@ export const insertNewUser = async (user: any) => {
         return { success: false, error: error.message };
     }
 };
+
+
+export const getUser = async (email: string) => {
+    const usersCollection: Collection = db.collection(USERS_COLLECTION_NAME);
+    try {
+        return await usersCollection.findOne({email});
+    } catch (error: any) {
+        console.error(`Error Message: ${error.message}`, {
+            functionName: getUser.name,
+        });
+        throw Error(`Error Message: ${error.message}`)
+    }
+};

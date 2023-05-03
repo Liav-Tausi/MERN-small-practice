@@ -5,7 +5,6 @@ const task1: ITask = {
     description: 'page 7',
     isDone: false,
     user_id: '1'
-
 }
 
 const task2: ITask = {
